@@ -1,9 +1,11 @@
 package com.company.apps;
 
 import com.company.ds.BasicQueue;
+import com.company.ds.ListQueue;
+import com.company.interfaces.Queue;
 
 public class SnowbirdLiftApp {
-    BasicQueue<Gad2Chair> gad2Lift = new BasicQueue<Gad2Chair>();
+    Queue<Gad2Chair> gad2Lift = new ListQueue<>();
 
     public static void main(String[] args) {
         SnowbirdLiftApp app = new SnowbirdLiftApp();

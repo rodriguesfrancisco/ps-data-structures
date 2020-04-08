@@ -2,17 +2,16 @@ package com.company.ds;
 
 import com.company.interfaces.Queue;
 
-public class BasicQueue<T> implements Queue<T> {
-    private T[] data;
+import java.util.ArrayList;
+
+public class ListQueue<T> implements Queue<T> {
+
+    private ArrayList<T> data;
     private int front;
     private int end;
 
-    public BasicQueue() {
-        this(1000);
-    }
-
-    public BasicQueue(int size) {
-        data = (T[]) new Object[size];
+    public ListQueue() {
+        data = new ArrayList<>();
         this.front = -1;
         this.end = -1;
     }
@@ -25,30 +24,25 @@ public class BasicQueue<T> implements Queue<T> {
     }
 
     public void enQueue(T item) {
-        this.data[++this.end] = item;
+        this.data.add(++this.end, item);
         if(this.front == -1)
             this.front++;
     }
 
     public T deQueue() {
         if(this.front <= this.end)
-            return data[this.front++];
+            return data.get(this.front++);
 
-        throw new IllegalStateException("Queue is empty!");
+        throw new IllegalStateException("Queue is empty");
     }
 
     public boolean contains(T item) {
         if(front <= end) {
-            for(int i = front; i < end; i++) {
-                if(data[i].equals(item)) {
-                    return true;
-                }
-            }
-
-            return false;
+            if(data.contains(item))
+                return true;
         }
 
-        throw new IllegalArgumentException("This queue dont contain the item: " + item);
+        return false;
     }
 
     public T access(int position) {
@@ -59,7 +53,7 @@ public class BasicQueue<T> implements Queue<T> {
 
         for(int i = front; i < end; i++) {
             if(trueIndex == position)
-                return data[i];
+                return data.get(i);
 
             trueIndex++;
         }
